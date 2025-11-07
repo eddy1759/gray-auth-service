@@ -8,9 +8,4 @@ export class MessagesController {
       where: { id: messageId },
     });
   }
-
-  @Post()
-  sendMessage(@GetUser() user: User) {
-    // ...
-  }
 }
