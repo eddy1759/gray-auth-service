@@ -1,0 +1,11 @@
+version: 1 # Configuration schema version (required)
+default_severity: 'error' # Default severity for rules (error/warning)
+rules:
+  - name: "Standard AI Review"
+    condition: "ai-review"
+    enabled: true
+    prompt: "Review this code for any bugs, vulnerabilities, or deviations from best practices."
+  - name: "Block TODOs"
+    condition: "banned-terms"
+    terms: ["FIXME", "TODO", "HACK"]
+    enabled: true
