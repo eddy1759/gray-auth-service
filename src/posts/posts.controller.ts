@@ -1,16 +1,16 @@
 import { GetUser } from './get-user.decorator';
-import { Controller, Get, Param } from '@nestjs/common';
+import { User } from '@prisma/client';
+import { Controller, Get } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Controller('posts')
 export class PostsController {
-constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
-  @Get('user/:userId')
-  async getPostsForUser(@Param('userId') userId: string) {
-
+  @Get('my-posts')
+  async getMyPosts(@GetUser() user: User) { 
     const posts = await this.prisma.post.findMany({
-      where: { authorId: userId },
+      where: { authorId: user.id }, 
     });
 
     const detailedPosts = [];
